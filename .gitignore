@@ -1,26 +1,56 @@
 # ========================
 # Laravel Backend
 # ========================
-backend/vendor/
-backend/node_modules/
-backend/.env
+backend/.phpunit.cache
+backend/node_modules
+backend/public/build
+backend/public/hot
+backend/public/storage
 backend/storage/*.key
+backend/storage/pail
 backend/storage/framework/cache/*
 backend/storage/framework/sessions/*
 backend/storage/framework/views/*
 backend/bootstrap/cache/*
-backend/public/build/
+backend/vendor
+backend/.env
+backend/.env.backup
+backend/.env.production
+backend/.phpactor.json
+backend/.phpunit.result.cache
+backend/Homestead.json
+backend/Homestead.yaml
+backend/npm-debug.log
+backend/yarn-error.log
+backend/auth.json
+backend/.fleet
+backend/.idea
+backend/.nova
+backend/.vscode
+backend/.zed
+
 
 # ========================
 # React Web
 # ========================
-web/node_modules/
-web/dist/
-web/build/
 web/.env
 web/.env.local
 web/.env.development
 web/.env.production
+
+web/Logs
+web/logs
+web/*.log
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+web/pnpm-debug.log*
+web/lerna-debug.log*
+web/node_modules
+web/dist
+web/dist-ssr
+web/build/
+web/*.local
 
 # ========================
 # Mobile (genérico)
