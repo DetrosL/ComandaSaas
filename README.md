@@ -32,6 +32,9 @@ O sistema será composto por:
 - Flutter
 - Dart
 
+### Database
+- PostgreSQL
+
 ### Futuro (Planejado)
 - Autenticação JWT
 - Multi-tenant
