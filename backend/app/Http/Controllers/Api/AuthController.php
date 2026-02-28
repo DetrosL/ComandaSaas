@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -16,35 +15,31 @@ class AuthController extends Controller
             'password' => ['required','string'],
         ]);
 
-        $user = User::where('email', $data['email'])->first();
-
-        if (!$user || !Hash::check($data['password'], $user->password)) {
-            return response()->json([
-                'message' => 'Credenciais inválidas.'
-            ], 422);
+        if (!Auth::attempt($data)) {
+            return response()->json(['success'=>false,'message'=>'Credenciais inválidas.','data'=>null], 401);
         }
 
-        $token = $user->createToken('api-token')->plainTextToken;
+        $user = $request->user();
+        $token = $user->createToken('web')->plainTextToken;
 
         return response()->json([
-            'token' => $token,
-            'user' => $user,
+            'success' => true,
+            'message' => null,
+            'data' => [
+                'token' => $token,
+                'user' => $user,
+            ],
         ]);
     }
 
     public function me(Request $request)
     {
-        return response()->json([
-            'user' => $request->user(),
-        ]);
+        return response()->json(['success'=>true,'message'=>null,'data'=>$request->user()]);
     }
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json([
-            'message' => 'Logout realizado com sucesso.'
-        ]);
+        $request->user()->currentAccessToken()?->delete();
+        return response()->json(['success'=>true,'message'=>'Logout ok.','data'=>null]);
     }
 }
